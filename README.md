@@ -2,7 +2,7 @@
 
 ## Description
 
-Python code designed to automate the process of notifying users about planned **KPLC** (**Kenya Power and Lighting Company**) power interruptions. It scrapes information from a specified URL, processes PDF files, and sends out email notifications.
+Python code designed to automate the process of notifying users about planned **KPLC** (**Kenya Power and Lighting Company**) power interruptions. It scrapes information from a specified URL, processes the latest PDF file, and sends out email notifications.
 
 ## Prerequisites
 
