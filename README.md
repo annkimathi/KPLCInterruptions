@@ -17,13 +17,13 @@ This Python application is designed to automate the process of notifying users a
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/your-repo-name.git
+    git clone https://github.com/annkimathi/KPLCInterruptions
     ```
 
 2. Navigate into the project directory:
 
     ```bash
-    cd your-repo-name
+    cd KPLCInterruptions
     ```
 
 3. Install the required packages:
