@@ -17,7 +17,7 @@ This Python application is designed to automate the process of notifying users a
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/annkimathi/KPLCInterruptions
+    git clone https://github.com/annkimathi/KPLCInterruptions.git
     ```
 
 2. Navigate into the project directory:
