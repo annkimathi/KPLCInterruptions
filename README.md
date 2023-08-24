@@ -4,6 +4,10 @@
 
 This Python application is designed to automate the process of notifying users about planned power interruptions. It scrapes information from a specified URL, processes PDF files, and sends out email notifications.
 
+## Prerequisites
+
+- Tesseract: This application uses Tesseract for OCR (Optical Character Recognition). Make sure to install it and add it to your system path. For installation guide, please refer to the [Tesseract Documentation](https://tesseract-ocr.github.io/tessdoc/).
+
 ## Features
 
 - Web scraping to gather power interruption data
