@@ -2,7 +2,7 @@
 
 ## Description
 
-This Python application is designed to automate the process of notifying users about planned power interruptions. It scrapes information from a specified URL, processes PDF files, and sends out email notifications.
+This Python application is designed to automate the process of notifying users about planned KPLC (Kenya Power and Lighting Company) power interruptions. It scrapes information from a specified URL, processes PDF files, and sends out email notifications.
 
 ## Prerequisites
 
