@@ -120,12 +120,12 @@ def main():
                 <html lang='en'>
                 <body>
                 <p>Greetings,</p>
-                <p>This is to inform you that there is a Scheduled Power Interruption around the area: <b>{DEFAULT_LOCATION.upper()}</b> on the date: <b>{date}</b>.</p> 
+                <p>This is to inform you that there is a Scheduled Power Interruption around the area: <b>{DEFAULT_LOCATION.upper()}</b> on: <b>{date}</b>.</p> 
                 <p>The interruption will begin from <b>{time}</b>.</p>
                 <p>Kindly make the necessary preparations to mitigate any inconveniences this may cause.</p>
                 <br>
                 <p>Thank you for your understanding on this matter.</p>
-                <p>Best Regards,<br>Kenya Power and Lighting Company</p>
+                <p>Best Regards</p>
                 </body>
                 </html>
             """
@@ -138,10 +138,10 @@ def main():
                 <body>
                 <p>Greetings,</p>
                 <p>There is no planned power interruption for the area: <b>{DEFAULT_LOCATION.upper()}</b> in the next two weeks.</p>
-                <p>If '{DEFAULT_LOCATION.upper()}' is critical for you or if you need more information, please contact our customer service for further details.</p>
+                <p>If '{DEFAULT_LOCATION.upper()}' is critical for you or if you need more information, please contact KPLC's  customer service for further details.</p>
                 <br>
                 <p>Thank you for your attention to this matter.</p>
-                <p>Best Regards,<br>Kenya Power and Lighting Company</p>
+                <p>Best Regards</p>
                 </body>
                 </html>
             """
