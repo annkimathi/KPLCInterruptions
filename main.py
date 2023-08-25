@@ -164,8 +164,8 @@ def main():
                     <div class='header'>KPLC Notification</div>
                     <div class='content'>
                         <p>Greetings,</p>
-                        <p>This is to inform you that there is a Scheduled Power Interruption around the area: <span class='important-text'>{DEFAULT_LOCATION.upper()}</span> on: <span class='important-text'>{date}</span>.</p>
-                        <p>The interruption will begin from <span class='important-text'>{time}</span>.</p>
+                        <p>This is to inform you that there is a Scheduled Power Interruption around <span class='important-text'>{DEFAULT_LOCATION.upper()}</span> on <span class='important-text'>{date}</span></p>
+                        <p>The interruption will begin from <span class='important-text'>{time}</span></p>
                         <p>Kindly make the necessary preparations to mitigate any inconveniences this may cause.</p>
                         <p>For more information, please contact:</p>
                         <p>National Contact Centre: 97771 or 0703 070 707 | 0732 170 170</p>
@@ -213,7 +213,7 @@ def main():
                         <div class='header'>KPLC Notification</div>
                         <div class='content'>
                             <p>Greetings,</p>
-                            <p>Good news! There is no planned power interruption for the area: <span class='important-text'>{DEFAULT_LOCATION.upper()}</span> in the next two weeks.</p>
+                            <p>Good news! There is no planned power interruption around <span class='important-text'>{DEFAULT_LOCATION.upper()}</span> in the next two weeks.</p>
                             <p>If you experience a power outage in your area or require additional information, please reach out to KPLC's customer service using the contact details provided below:</p>
                             <p>National Contact Centre: 97771 or 0703 070 707 | 0732 170 170</p>
                             <p>USSD & Telephone Number: Dial *977# or +254 203201000</p>
