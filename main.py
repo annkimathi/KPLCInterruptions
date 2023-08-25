@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime
 from pdf2image import convert_from_path
 import pytesseract
 import re
