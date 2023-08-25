@@ -10,6 +10,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
 import logging
+from datetime import datetime
 
 # Configuration and Setup
 load_dotenv()
@@ -103,29 +104,76 @@ def extract_date_time(text, location):
 
 
 def main():
-    pdf_link = get_latest_interruption_pdf()
-    if pdf_link:
-        logging.info(f"Downloading PDF: {pdf_link}")
-        file_path = download_pdf(pdf_link)
-        text = ocr_pdf(file_path)
+    file_path = None  # Initialize file_path variable
+    try:
+        pdf_link = get_latest_interruption_pdf()
+        if pdf_link:
+            logging.info(f"Downloading PDF: {pdf_link}")
+            file_path = download_pdf(pdf_link)
+            text = ocr_pdf(file_path)
 
-        if len(text) < 50:
-            logging.error("OCR output is suspiciously short. Please verify the content of the PDF.")
+            if len(text) < 50:
+                logging.error("OCR output is suspiciously short. Please verify the content of the PDF.")
 
-        date, time = extract_date_time(text, DEFAULT_LOCATION)
+            date, time = extract_date_time(text, DEFAULT_LOCATION)
+            if date and time:
+                try:
+                    scheduled_date = datetime.strptime(date, "%A %d.%m.%Y")
+                except ValueError as e:
+                    logging.error(f"Failed to parse the date: {e}")
+                    return
+
+                today = datetime.now()
+
+                if scheduled_date.date() < today.date():
+                    logging.info("The scheduled interruption date has already passed. No email will be sent.")
+                    return
+
         if date and time:
             subject = f"Scheduled Power Interruption for '{DEFAULT_LOCATION}'"
             msg = f"""
                 <!DOCTYPE html>
                 <html lang='en'>
+                <head>
+                    <style>
+                        body {{
+                            font-family: Arial, sans-serif;
+                        }}
+                        .header {{
+                            background-color: #f4f4f4;
+                            padding: 10px;
+                            text-align: center;
+                        }}
+                        .content {{
+                            margin: 20px;
+                            padding: 20px;
+                            background-color: #fff;
+                            border: 1px solid #ddd;
+                        }}
+                        .footer {{
+                            text-align: center;
+                            padding: 10px;
+                            background-color: #f4f4f4;
+                        }}
+                        .important-text {{
+                            font-weight: bold;
+                            color: red;
+                        }}
+                    </style>
+                </head>
                 <body>
-                <p>Greetings,</p>
-                <p>This is to inform you that there is a Scheduled Power Interruption around the area: <b>{DEFAULT_LOCATION.upper()}</b> on: <b>{date}</b>.</p> 
-                <p>The interruption will begin from <b>{time}</b>.</p>
-                <p>Kindly make the necessary preparations to mitigate any inconveniences this may cause.</p>
-                <br>
-                <p>Thank you for your understanding on this matter.</p>
-                <p>Best Regards</p>
+                    <div class='header'>KPLC Notification</div>
+                    <div class='content'>
+                        <p>Greetings,</p>
+                        <p>This is to inform you that there is a Scheduled Power Interruption around the area: <span class='important-text'>{DEFAULT_LOCATION.upper()}</span> on: <span class='important-text'>{date}</span>.</p>
+                        <p>The interruption will begin from <span class='important-text'>{time}</span>.</p>
+                        <p>Kindly make the necessary preparations to mitigate any inconveniences this may cause.</p>
+                        <p>For more information, please contact:</p>
+                        <p>National Contact Centre: 97771 or 0703 070 707 | 0732 170 170</p>
+                        <p>USSD & Telephone Number: Dial *977# or +254 203201000</p>
+                        <p>Email: <a href='mailto:customercare@kplc.co.ke'>customercare@kplc.co.ke</a></p>
+                    </div>
+                    <div class='footer'>Best Regards</div>
                 </body>
                 </html>
             """
@@ -133,21 +181,54 @@ def main():
         else:
             subject = f"No Scheduled Maintenance for '{DEFAULT_LOCATION}'"
             msg = f"""
-                <!DOCTYPE html>
-                <html lang='en'>
-                <body>
-                <p>Greetings,</p>
-                <p>There is no planned power interruption for the area: <b>{DEFAULT_LOCATION.upper()}</b> in the next two weeks.</p>
-                <p>If '{DEFAULT_LOCATION.upper()}' is critical for you or if you need more information, please contact KPLC's  customer service for further details.</p>
-                <br>
-                <p>Thank you for your attention to this matter.</p>
-                <p>Best Regards</p>
-                </body>
-                </html>
-            """
+                    <!DOCTYPE html>
+                    <html lang='en'>
+                    <head>
+                        <style>
+                            body {{
+                                font-family: Arial, sans-serif;
+                            }}
+                            .header {{
+                                background-color: #f4f4f4;
+                                padding: 10px;
+                                text-align: center;
+                            }}
+                            .content {{
+                                margin: 20px;
+                                padding: 20px;
+                                background-color: #fff;
+                                border: 1px solid #ddd;
+                            }}
+                            .footer {{
+                                text-align: center;
+                                padding: 10px;
+                                background-color: #f4f4f4;
+                            }}
+                            .important-text {{
+                                font-weight: bold;
+                                color: red;
+                            }}
+                        </style>
+                    </head>
+                    <body>
+                        <div class='header'>KPLC Notification</div>
+                        <div class='content'>
+                            <p>Greetings,</p>
+                            <p>Good news! There is no planned power interruption for the area: <span class='important-text'>{DEFAULT_LOCATION.upper()}</span> in the next two weeks.</p>
+                            <p>If you experience a power outage in your area or require additional information, please reach out to KPLC's customer service using the contact details provided below:</p>
+                            <p>National Contact Centre: 97771 or 0703 070 707 | 0732 170 170</p>
+                            <p>USSD & Telephone Number: Dial *977# or +254 203201000</p>
+                            <p>Email: <a href='mailto:customercare@kplc.co.ke'>customercare@kplc.co.ke</a></p>
+                        </div>
+                        <div class='footer'>Best Regards</div>
+                    </body>
+                    </html>
+                """
             send_email(subject, msg, recipients)
 
-        os.remove(file_path)
+    finally:
+        if file_path:
+            os.remove(file_path)
 
 
 if __name__ == "__main__":
