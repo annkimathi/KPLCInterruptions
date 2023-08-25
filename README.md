@@ -7,6 +7,27 @@ Python code designed to automate the process of notifying users about planned **
 ## Prerequisites
 
 - **Tesseract**: This application uses Tesseract for OCR (Optical Character Recognition). Make sure to install it and add it to your system path. For installation guide, please refer to the [Tesseract Documentation](https://tesseract-ocr.github.io/tessdoc/).
+- **Poppler**: This application also requires Poppler for PDF rendering. Follow the instructions below to install it on your system:
+
+    ### Linux
+
+    1. Update your package list:
+
+        ```bash
+        sudo apt-get update
+        ```
+    2. Install Poppler:
+  
+         ```bash
+        sudo apt-get install poppler-utils
+        ```
+    ### Windows
+
+    1. Download the latest Poppler binary from [this link](https://github.com/oschwartz10612/poppler-windows/releases/tag/v23.08.0-0).
+
+    2. Extract the downloaded archive.
+
+    3. Add the `bin` directory from the extracted archive to your system's PATH.
 
 ## Features
 

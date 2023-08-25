@@ -36,13 +36,17 @@ def get_latest_interruption_pdf(URL_TO_SCRAPE):
         return None
 
 
-def download_pdf(pdf_url, destination="temp.pdf"):
+def download_pdf(pdf_url):
     try:
         response = requests.get(pdf_url)
         response.raise_for_status()
-        with open(destination, 'wb') as file:
+
+        # Extract the original filename from the URL
+        original_filename = pdf_url.split('/')[-1]
+
+        with open(original_filename, 'wb') as file:
             file.write(response.content)
-        return destination
+        return original_filename
     except Exception as e:
         logging.error(f"Error downloading PDF: {e}")
         return None

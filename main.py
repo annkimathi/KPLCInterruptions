@@ -92,7 +92,7 @@ def main():
             </body>
             </html>
             """
-            send_email(subject, msg, recipients, email, password)
+            send_email(subject, msg, recipients, email, password, file_path)
         else:
             subject = f"No Scheduled Maintenance for '{DEFAULT_LOCATION}'"
             msg = f"""
@@ -152,7 +152,7 @@ def main():
             </body>
             </html>
             """
-            send_email(subject, msg, recipients, email, password)
+            send_email(subject, msg, recipients, email, password, file_path)
     finally:
         if file_path:
             os.remove(file_path)
