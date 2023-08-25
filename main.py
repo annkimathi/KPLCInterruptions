@@ -161,7 +161,7 @@ def main():
                     </style>
                 </head>
                 <body>
-                    <div class='header'>KPLC Notification</div>
+                    <div class='header'>KPLC Scheduled Power Interruption</div>
                     <div class='content'>
                         <p>Greetings,</p>
                         <p>This is to inform you that there is a Scheduled Power Interruption around <span class='important-text'>{DEFAULT_LOCATION.upper()}</span> on <span class='important-text'>{date}</span></p>
