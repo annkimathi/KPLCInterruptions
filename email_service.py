@@ -1,8 +1,10 @@
+# Importing required modules
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import logging
 
+# Function to send emails
 def send_email(subject, msg, recipients, email, password):
     try:
         server = smtplib.SMTP('smtp.gmail.com:587')

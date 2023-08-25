@@ -1,3 +1,4 @@
+# Importing required modules
 from config import *
 from email_service import send_email
 from scraper_service import get_latest_interruption_pdf, download_pdf
@@ -157,5 +158,6 @@ def main():
             os.remove(file_path)
 
 
+# Main entry point of the script
 if __name__ == "__main__":
     main()
