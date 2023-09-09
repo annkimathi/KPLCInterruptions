@@ -62,11 +62,14 @@ Python code designed to automate the process of notifying users about planned **
 The application uses the following environment variables:
 
 - `MAIL_USERNAME`: Your email address
+
 - `MAIL_PASSWORD`: Your email password
-- `RECIPIENTS`: Comma-separated list of email recipients
-- `LOCATION`: Default location for power interruption monitoring
+    - **Note**: If you are using Gmail as your email service, this should be the "App Password" that you generate from your Gmail account settings, NOT your Gmail password.
+
+- `RECIPIENTS_LOCATIONS`: Comma-separated list of email recipients paired with their locations, separated by a colon.
 
 Copy the `.env.example` to `.env` and fill in these variables.
+
 
 ## Usage
 
