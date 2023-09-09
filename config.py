@@ -11,9 +11,12 @@ URL_TO_SCRAPE = "https://kplc.co.ke/category/view/50/planned-power-interruptions
 
 email = os.getenv('MAIL_USERNAME')
 password = os.getenv('MAIL_PASSWORD')
-recipients = os.getenv('RECIPIENTS').split(',')
-DEFAULT_LOCATION = os.getenv('LOCATION')
+recipients_locations = os.getenv('RECIPIENTS_LOCATIONS').split(',')
 
-if not email or not password or not recipients or not DEFAULT_LOCATION:
+# Split the recipient email and their location
+recipients = [r.split(':')[0] for r in recipients_locations]
+locations = [r.split(':')[1] for r in recipients_locations]
+
+if not email or not password or not recipients or not locations:
     logging.error("One or more environment variables are missing!")
     exit(1)
